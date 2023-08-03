@@ -11,7 +11,7 @@ git clone https://github.com/SALTx/telegram-bot-template
 npm install
 ```
 3. Create a new bot using [BotFather](https://t.me/botfather) and get the token.
-4. Create a file named `.env` in the root directory of the project and add the following:
+4. Insert the token in the `.env` file:
 ```env
 TOKEN=your_token
 ```
