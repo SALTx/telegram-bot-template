@@ -1,0 +1,12 @@
+{
+  "name": "telegram-bot-template",
+  "version": "1.0.0",
+  "description": "starting files for creating your own telegram bot using nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
