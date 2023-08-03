@@ -1,40 +1,46 @@
-import dotenv from "dotenv";
-import telegramBot from "node-telegram-bot-api";
-import commands from "./commands.js";
-import chalk from "chalk";
-import fs from "fs";
+import dotenv from 'dotenv';
+import TelegramBot from 'node-telegram-bot-api';
+import commands from './commands.js';
+import chalk from 'chalk';
+import fs from 'fs';
 
 dotenv.config();
-const bot = new telegramBot(process.env.TOKEN, { polling: true });
+const bot = new TelegramBot(process.env.TOKEN, {polling: true});
 
-//! On receiving a message
-bot.on("message", (msg) => {
+// ! On receiving a message
+bot.on('message', (msg) => {
   const chatID = msg.chat.id;
-  let command = msg.text.split(" ")[0].substring(msg.text[0] === "/" ? 1 : 0);
-  const args = msg.text.split(" ").slice(1);
+  const command = msg.text.split(' ')[0].substring(msg.text[0] === '/' ? 1 : 0);
+  const args = msg.text.split(' ').slice(1);
 
   // Log the message
   logMessage(msg);
 
   // If the command is not in the list, respond with "Unknown command"
   if (!commands.has(command)) {
-    bot.sendMessage(chatID, "Unknown command");
+    bot.sendMessage(chatID, 'Unknown command');
     return;
   }
 
   // If the command is in the list, execute it
   commands.get(command).callback(bot, msg, args);
-  console.log("end of message");
+  console.log('end of message');
 });
 
-//! Logging function
+// ! Logging function
+/**
+ * Logs the message to the console and to a file
+ * @param {Object} msg The message object when a message is received
+ * @return {void}
+ */
 function logMessage(msg) {
-  const logFile = "log.txt";
-  const log = `${msg.from.username} (${msg.from.first_name} ${msg.from.last_name}) sent: ${msg.text}\n`;
+  const logFile = 'log.txt';
+  const name = `(${msg.from.first_name} ${msg.from.last_name})`;
+  const log = `${msg.from.username} ${name} sent: ${msg.text}\n`;
 
   // check if the file exists, if not. create one
   if (!fs.existsSync(logFile)) {
-    fs.writeFileSync(logFile, "");
+    fs.writeFileSync(logFile, '');
   } else {
     fs.appendFileSync(logFile, log);
   }
@@ -42,5 +48,5 @@ function logMessage(msg) {
   console.log(log);
 }
 
-//! Bot running
-console.log(chalk.green("Bot is running..."));
+// ! Bot running
+console.log(chalk.green('Bot is running...'));
