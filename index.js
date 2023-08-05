@@ -50,3 +50,26 @@ function logMessage(msg) {
 
 // ! Bot running
 console.log(chalk.green('Bot is running...'));
+
+
+// ! Message object
+// {
+//   message_id: 3,
+//   from: {
+//     id: 123456789,
+//     is_bot: false,
+//     first_name: 'John',
+//     last_name: 'Doe',
+//     username: 'johndoe',
+//     language_code: 'en',
+//   },
+//   chat: {
+//     id: 123456789,
+//     first_name: 'John',
+//     last_name: 'Doe',
+//     username: 'johndoe',
+//     type: 'private',
+//   },
+//   date: 1600000000,
+//   text: 'Hello, world!',
+// }
