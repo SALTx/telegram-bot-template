@@ -40,7 +40,7 @@ function logMessage(msg) {
 
   // check if the file exists, if not. create one
   if (!fs.existsSync(logFile)) {
-    fs.writeFileSync(logFile, '');
+    fs.writeFileSync(logFile, log);
   } else {
     fs.appendFileSync(logFile, log);
   }
