@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
 import TelegramBot from 'node-telegram-bot-api';
 import commands from './commands.js';
+import dotenv from 'dotenv';
 import chalk from 'chalk';
 import fs from 'fs';
 
@@ -24,7 +24,6 @@ bot.on('message', (msg) => {
 
   // If the command is in the list, execute it
   commands.get(command).callback(bot, msg, args);
-  console.log('end of message');
 });
 
 // ! Logging function
