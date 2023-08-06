@@ -27,7 +27,7 @@ npm run start
 - `/help` - Show list of commands and help message
 
 ## Author
-- [saahil](github.com/SALTx)
+- [saahil](https://github.com/SALTx)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
