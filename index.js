@@ -23,7 +23,7 @@ bot.on('message', (msg) => {
   }
 
   // If the command is in the list, execute it
-  commands.get(command).callback(bot, msg, args);
+  commands.get(command).callback(bot, msg, [args]);
 });
 
 // ! Logging function
