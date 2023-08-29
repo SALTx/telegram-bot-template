@@ -1,3 +1,7 @@
+/* eslint-disable */
+
+import config from './config.js';
+
 /**
  * Command class
  * @class
@@ -41,6 +45,24 @@ commands.set(
       });
       bot.sendMessage(msg.chat.id, helpMessage);
     }),
+);
+
+// ! Load config
+commands.set(
+  'loadconfig',
+  new Command('loadconfig', 'Load the config', (bot, msg, [args]) => {
+    const userConfig = config.loadConfig(msg);
+    bot.sendMessage(msg.chat.id, JSON.stringify(userConfig, null, 2));
+  })
+);
+
+// ! Update config
+commands.set(
+  'updateconfig',
+  new Command('updateconfig', 'Update the user config', (bot, msg, [args]) => {
+    const userConfig = config.updateConfig(msg, args[0], args[1]);
+    bot.sendMessage(msg.chat.id, JSON.stringify(userConfig, null, 2));
+  })
 );
 
 export default commands;
