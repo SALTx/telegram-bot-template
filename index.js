@@ -1,8 +1,8 @@
 import TelegramBot from 'node-telegram-bot-api';
 import commands from './commands.js';
+import logMessage from './log.js';
 import dotenv from 'dotenv';
 import chalk from 'chalk';
-import fs from 'fs';
 
 dotenv.config();
 const bot = new TelegramBot(process.env.TOKEN, {polling: true});
@@ -10,8 +10,8 @@ const bot = new TelegramBot(process.env.TOKEN, {polling: true});
 // ! On receiving a message
 bot.on('message', (msg) => {
   const chatID = msg.chat.id;
-  let command = msg.text.split(' ')[0].substring(msg.text[0] === '/' ? 1 : 0);
-  command = command.toLowerCase();
+  const command = msg.text.split(' ')[0].substring(msg.text[0] === '/' ? 1 : 0)
+      .toLowerCase();
   const args = msg.text.split(' ').slice(1);
 
   // Log the message
@@ -26,33 +26,6 @@ bot.on('message', (msg) => {
   // If the command is in the list, execute it
   commands.get(command).callback(bot, msg, [args]);
 });
-
-// ! Logging function
-/**
- * Logs the message to the console and to a file
- * @param {Object} msg The message object when a message is received
- * @return {void}
- */
-function logMessage(msg) {
-  const logFile = 'log.txt';
-  const name = `(${msg.from.first_name} ${msg.from.last_name})`;
-  // formatted date YYYY-MM-DD HH:MM:SS
-  const formattedDate = new Date()
-      .toISOString()
-      .replace(/T/, ' ')
-      .replace(/\..+/, '');
-  const log =
-  `[${formattedDate}]${msg.from.username} ${name} sent: ${msg.text}\n`;
-
-  // check if the file exists, if not. create one
-  if (!fs.existsSync(logFile)) {
-    fs.writeFileSync(logFile, log);
-  } else {
-    fs.appendFileSync(logFile, log);
-  }
-
-  console.log(log);
-}
 
 // ! Set commands
 const botCommands = [];
