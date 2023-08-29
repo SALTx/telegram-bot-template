@@ -9,8 +9,7 @@ import fs from 'fs';
 function logMessage(msg) {
   const logFile = 'log.txt';
   const name = `(${msg.from.first_name} ${msg.from.last_name})`;
-  // formatted date YYYY-MM-DD HH:MM:SS
-  const formattedDate = new Date()
+  const formattedDate = new Date(new Date().getTime() + 8 * 3600 * 1000)
       .toISOString()
       .replace(/T/, ' ')
       .replace(/\..+/, '');
