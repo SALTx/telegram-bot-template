@@ -54,6 +54,16 @@ function logMessage(msg) {
   console.log(log);
 }
 
+// ! Set commands
+const botCommands = [];
+commands.forEach((command) => {
+  botCommands.push({
+    command: command.name,
+    description: command.description,
+  });
+});
+bot.setMyCommands(botCommands);
+
 // ! Bot running
 console.log(chalk.green('Bot is running...'));
 
