@@ -8,6 +8,7 @@ function generateConfig(msg) {
 
     return {
         [chatID]: {
+            'userID': msg.from.id,
             'firstName': msg.from.first_name,
             'lastName': msg.from.last_name,
             'username': msg.from.username,
@@ -37,4 +38,24 @@ function loadConfig(msg) {
         fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
         return config[chatID];
     }
+}
+
+//! Update user configuration
+function updateConfig(msg, property, value) {
+    const chatID = msg.chat.id;
+    loadConfig(msg);
+
+    const configFile = 'config.json';
+    const config = JSON.parse(fs.readFileSync(configFile));
+    
+    config[chatID][property] = value;
+    fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+    return config[chatID];
+}
+
+
+export default {
+    generateConfig,
+    loadConfig,
+    updateConfig,
 }
