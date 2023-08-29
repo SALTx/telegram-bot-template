@@ -1,6 +1,6 @@
 # telegram bot template
 
- Starting files for creating your own telegram bot using nodejs
+Starting files for creating your own telegram bot using nodejs
 
 ## Getting started
 

@@ -10,7 +10,8 @@ const bot = new TelegramBot(process.env.TOKEN, {polling: true});
 // ! On receiving a message
 bot.on('message', (msg) => {
   const chatID = msg.chat.id;
-  const command = msg.text.split(' ')[0].substring(msg.text[0] === '/' ? 1 : 0);
+  let command = msg.text.split(' ')[0].substring(msg.text[0] === '/' ? 1 : 0);
+  command = command.toLowerCase();
   const args = msg.text.split(' ').slice(1);
 
   // Log the message
@@ -35,7 +36,13 @@ bot.on('message', (msg) => {
 function logMessage(msg) {
   const logFile = 'log.txt';
   const name = `(${msg.from.first_name} ${msg.from.last_name})`;
-  const log = `${msg.from.username} ${name} sent: ${msg.text}\n`;
+  // formatted date YYYY-MM-DD HH:MM:SS
+  const formattedDate = new Date()
+      .toISOString()
+      .replace(/T/, ' ')
+      .replace(/\..+/, '');
+  const log =
+  `[${formattedDate}]${msg.from.username} ${name} sent: ${msg.text}\n`;
 
   // check if the file exists, if not. create one
   if (!fs.existsSync(logFile)) {
@@ -49,7 +56,6 @@ function logMessage(msg) {
 
 // ! Bot running
 console.log(chalk.green('Bot is running...'));
-
 
 // ! Message object
 // {

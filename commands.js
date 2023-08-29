@@ -13,7 +13,7 @@ class Command {
    * @param {string} description The description of the command
    * @param {function} callback The callback function of the command
    * @return {void}
-  */
+   */
   constructor(name, description, callback) {
     this.name = name;
     this.description = description;
