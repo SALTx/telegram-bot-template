@@ -27,6 +27,11 @@ bot.on('message', (msg) => {
   commands.get(command).callback(bot, msg, [args]);
 });
 
+// ! On polling error
+bot.on('polling_error', (error) => {
+  console.log(chalk.red('Polling error:'), error);
+});
+
 // ! Set commands
 const botCommands = [];
 commands.forEach((command) => {
